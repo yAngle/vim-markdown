@@ -10,10 +10,10 @@ setlocal formatoptions+=r
 " Do not automatically insert bullets when auto-wrapping with text-width
 setlocal formatoptions-=c
 " Accept various markers as bullets
-setlocal comments=b:*,b:+,b:-
+setlocal comments=fb:*,fb:+,fb:-
 
 " Automatically continue blockquote on line break
-setlocal comments+=b:>
+setlocal comments+=fb:>
 
 " Only define the function once
 if exists("*GetMarkdownIndent") | finish | endif
