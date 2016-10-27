@@ -45,7 +45,7 @@ function! s:PrevNonBlank(lnum)
 endfunction
 
 function GetMarkdownIndent()
-    if v:lnum > 2 && s:IsBlankLine(getline(v:lnum - 1)) && s:IsBlankLine(getline(v:lnum - 2))
+    if v:lnum > 2 && s:IsBlankLine(getline(v:lnum - 1)) " && s:IsBlankLine(getline(v:lnum - 2))
         return 0
     endif
     let list_ind = get(g:, "vim_markdown_new_list_item_indent", 4)
