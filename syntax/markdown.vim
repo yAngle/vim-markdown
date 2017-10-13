@@ -50,12 +50,14 @@ endif
 syn region mkdItalic matchgroup=mkdItalic start="\%(\*\|_\)"    end="\%(\*\|_\)"
 syn region mkdBold matchgroup=mkdBold start="\%(\*\*\|__\)"    end="\%(\*\*\|__\)"
 syn region mkdBoldItalic matchgroup=mkdBoldItalic start="\%(\*\*\*\|___\)"    end="\%(\*\*\*\|___\)"
+syn region mkdStrike matchgroup=mkdStrike start="\%(\~\~\)"    end="\%(\~\~\)"
 execute 'syn region htmlItalic matchgroup=mkdItalic start="\%(^\|\s\)\zs\*\ze[^\\\*\t ]\%(\%([^*]\|\\\*\|\n\)*[^\\\*\t ]\)\?\*\_W" end="[^\\\*\t ]\zs\*\ze\_W" keepend contains=@Spell' . s:oneline . s:concealends
 execute 'syn region htmlItalic matchgroup=mkdItalic start="\%(^\|\s\)\zs_\ze[^\\_\t ]" end="[^\\_\t ]\zs_\ze\_W" keepend contains=@Spell' . s:oneline . s:concealends
 execute 'syn region htmlBold matchgroup=mkdBold start="\%(^\|\s\)\zs\*\*\ze\S" end="\S\zs\*\*" keepend contains=@Spell' . s:oneline . s:concealends
 execute 'syn region htmlBold matchgroup=mkdBold start="\%(^\|\s\)\zs__\ze\S" end="\S\zs__" keepend contains=@Spell' . s:oneline . s:concealends
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs\*\*\*\ze\S" end="\S\zs\*\*\*" keepend contains=@Spell' . s:oneline . s:concealends
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend contains=@Spell' . s:oneline . s:concealends
+execute 'syn region htmlStrike matchgroup=mkdStrike start="\%(^\|\s\)\zs\~\~\ze\S" end="\S\zs\~\~" keepend contains=@Spell' . s:oneline . s:concealends
 
 " [link](URL) | [link][id] | [link][] | ![image](URL)
 syn region mkdFootnotes matchgroup=mkdDelimiter start="\[^"    end="\]"
@@ -97,7 +99,6 @@ syn region mkdBlockquote   start=/^\s*>/                   end=/$/ contains=mkdL
 syn region mkdCode         start=/\(\([^\\]\|^\)\\\)\@<!`/ end=/\(\([^\\]\|^\)\\\)\@<!`/
 syn region mkdCode         start=/\s*``[^`]*/              end=/[^`]*``\s*/
 syn region mkdCode         start=/^\s*\z(`\{3,}\)[^`]*$/   end=/^\s*\z1`*\s*$/
-syn region mkdCode         start=/\s*\~\~[^\~]*/           end=/[^\~]*\~\~\s*/
 syn region mkdCode         start=/^\s*\z(\~\{3,}\)\s*[0-9A-Za-z_+-]*\s*$/         end=/^\s*\z1\~*\s*$/
 syn region mkdCode         start="<pre[^>]*\\\@<!>"        end="</pre>"
 syn region mkdCode         start="<code[^>]*\\\@<!>"       end="</code>"
@@ -151,7 +152,7 @@ if get(g:, 'vim_markdown_math', 0)
   syn region mkdMath start="\\begin{\z(.\{-}\)}" end="\\end{\z1}" contains=@tex keepend
 endif
 
-syn cluster mkdNonListItem contains=@htmlTop,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath
+syn cluster mkdNonListItem contains=@htmlTop,htmlItalic,htmlBold,htmlBoldItalic,htmlStrike,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath
 
 "highlighting for Markdown groups
 HtmlHiLink mkdString        String
