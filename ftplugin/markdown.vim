@@ -684,7 +684,8 @@ function! s:MarkdownHighlightSources(force)
             if has_key(s:filetype_dict, ft)
                 let filetype = s:filetype_dict[ft]
             else
-                let filetype = ft
+                " Accomodate pandoc-style ```{=latex}...``` attributes.
+                let filetype = (ft == 'latex') ? 'tex' : ft
             endif
             let group = 'mkdSnippet' . toupper(substitute(filetype, "[+-]", "_", "g"))
             if !has_key(b:mkd_included_filetypes, filetype)
